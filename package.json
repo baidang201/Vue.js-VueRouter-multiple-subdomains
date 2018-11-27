@@ -11,6 +11,8 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "js-cookie": "^2.2.0",
+    "psl": "^1.1.29",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },

@@ -1,25 +1,15 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="http://chat.vuejs.org/" target="_blank" rel="noopener">Vue Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank" rel="noopener">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
-  </div>
+    <button @click="greet">greet</button>
+    <a href="http://route1.test.com:8080/">route1</a>
+  </div>  
 </template>
 
 <script>
+import * as Cookies from "js-cookie";
+import psl  from 'psl';
+
 export default {
   name: 'hello',
   data() {
@@ -27,6 +17,31 @@ export default {
       msg: 'Welcome to Your Vue.js PWA',
     };
   },
+   methods: {
+    greet() {
+      var strdomain;
+      if('127.0.0.1' == window.location.hostname || 'localhost' == window.location.hostname ) {
+        strdomain = window.location.hostname
+      }
+      else {
+        var psl = require('psl')
+        console.log(window.location.hostname)
+        console.log('psl begin' + psl)
+        console.log(psl)
+        console.log('psl end' + psl)
+
+        var parsedomain =psl.parse( window.location.hostname)
+        console.log(parsedomain)
+        console.log(psl.get( window.location.hostname))
+        console.log(psl.isValid( window.location.hostname))
+
+        strdomain = parsedomain.domain
+      }      
+
+      var cookievalue = Cookies.get('damoToken',  { domain: strdomain })      
+      Cookies.set('damoToken', cookievalue + '1', { domain: strdomain })
+    },
+  }
 };
 </script>
 

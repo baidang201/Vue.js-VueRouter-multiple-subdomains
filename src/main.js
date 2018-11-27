@@ -26,11 +26,12 @@ const router = () => {
   }
   return routes;
 };
+console.log(router);
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router,
+  router: index,
   template: '<App/>',
   components: { App },
 });
